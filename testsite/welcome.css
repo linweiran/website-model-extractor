@@ -1,0 +1,9 @@
+@import "format.css";
+@font-face{
+	font-family:myfontfamily;
+	src:url(welcome.woff2);
+}
+.xo {
+	font-family:myfontfamily;
+}
+/*HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
