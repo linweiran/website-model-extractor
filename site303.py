@@ -1,3 +1,7 @@
+def filenamepad(name):
+	sname = "p"*(13-len(name))+name
+	return sname
+
 def sixdigit(n):
 	strn=str(n)
 	lenn=len(strn)
@@ -164,9 +168,9 @@ def sitegenerate(website,sitecounter,instancecounter):
 				doccounter+=1
 	for i in init:
 		if type[i]=="Image":
-			gifg(responsesize[i],writeto+"/img"+str(mark[i])+".gif")
+			gifg(responsesize[i],writeto+"/"+filenamepad("img"+str(mark[i])+".gif"))
 		if type[i]=="Font":
-			with open(writeto+"/font"+str(mark[i])+".woff","w") as f:
+			with open(writeto+"/"+filenamepad("font"+str(mark[i])+".woff"),"w") as f:
 				f.write("A"*(responsesize[i]))
 		if type[i]=="Document":
 			st="<head>\n"
@@ -174,19 +178,19 @@ def sitegenerate(website,sitecounter,instancecounter):
 			if root==i:
 				st3=writeto+"/index.html"
 			else:
-				st3=writeto+"/index"+str(mark[i])+".html"
+				st3=writeto+"/"+filenamepad("index"+str(mark[i])+".html")
 			with open(st3,"w") as f:
 				for j in init:
 					if (init[j]==i) and (type[j]=="Stylesheet"):
 						st+="<link rel="+'"'+"stylesheet"+'"'
-						st+=" href="+'"'+"sheet"+str(mark[j])+".css"+'"'+">\n"
+						st+=" href="+'"'+filenamepad("sheet"+str(mark[j])+".css")+'"'+">\n"
 				for j in init:
 					if (init[j]==i) and (type[j]=="Document"):
 						st+="<iframe src="+'"'
-						st+="index"+str(mark[j])+".html"+'"'+"></iframe>\n"
+						st+=filenamepad("index"+str(mark[j])+".html")+'"'+"></iframe>\n"
 				for j in init:
 					if (init[j]==i) and (type[j]=="Script"):
-						st+="<script src="+'"'+"script"+str(mark[j])+".js"
+						st+="<script src="+'"'+filenamepad("script"+str(mark[j])+".js")
 						st+='"'+"></script>\n"
 	
 			
@@ -195,7 +199,7 @@ def sitegenerate(website,sitecounter,instancecounter):
 					if (init[j]==i) and (type[j]=="Font"):
 						st4+="@font-face{\n"
 						st4+="font-family:font"+str(mark[j])+";\n"
-						st4+="src:url(font"+str(mark[j])+".woff);\n"
+						st4+="src:url("+filenamepad("font"+str(mark[j])+".woff")+");\n"
 						st4+="}\n"
 						st4+=".x"+str(mark[j])+"{\n"
 						st4+="font-family:font"+str(mark[j])+";\n"
@@ -208,13 +212,13 @@ def sitegenerate(website,sitecounter,instancecounter):
 					
 				for j in init:
 					if (init[j]==i) and (type[j]=="Image"):
-						st+="<img src="+'"'+"img"+str(mark[j])+".gif"+'"'+">\n"
+						st+="<img src="+'"'+filenamepad("img"+str(mark[j])+".gif")+'"'+">\n"
 				for j in init:
 					if (init[j]==i) and (type[j]=="Font"):
 						st+="<span class="+'"'+"x"+str(mark[j])+'"'+">A</a>\n"
 
 				if root==i :
-					st+= '<script src="padding.js"></script>\n'
+					st+= '<script src="'+filenamepad('padding.js')+'"></script>\n'
 				st+="<!--"
 				htmlsize=responsesize[i]-len(st)-len(st2)
 				st+=htmlsize*"A"
@@ -231,18 +235,18 @@ def sitegenerate(website,sitecounter,instancecounter):
 			for j in init:
 				if (init[j]==i) and (type[j]=="Stylesheet"):
 					st+=front+"<link rel="+'"'+"stylesheet"+'"'
-					st+=" href="+'"'+"sheet"+str(mark[j])+".css"+'"'+">"+back
+					st+=" href="+'"'+filenamepad("sheet"+str(mark[j])+".css")+'"'+">"+back
 			for j in init:
 				if (init[j]==i) and (type[j]=="Script"):
-					st+=front+"<script src="+'"'+"script"+str(mark[j])+".js"
+					st+=front+"<script src="+'"'+filenamepad("script"+str(mark[j])+".js")
 					st+='"'+"></script>"+back
 			for j in init:
 				if (init[j]==i) and (type[j]=="Image"):
-					st+=front+"<img src="+'"'+"img"+str(mark[j])+".gif"+'"'+">"+back
+					st+=front+"<img src="+'"'+filenamepad("img"+str(mark[j])+".gif")+'"'+">"+back
 			for j in init:
 				if (init[j]==i) and (type[j]=="Document"):
 					varname="index"+str(mark[j])
-					st+="var "+varname+"=document.createElement('iframe');"+varname+".src='"+varname+".html';document.body.appendChild("+varname+");"
+					st+="var "+varname+"=document.createElement('iframe');"+varname+".src='"+filenamepad(varname+".html")+"';document.body.appendChild("+varname+");"
 
 			st4=""
 			for j in init:
@@ -250,7 +254,7 @@ def sitegenerate(website,sitecounter,instancecounter):
 					markj=str(mark[j])
 					st4+="var t"+markj+"=document.createElement("+'"'+'p'+'"'+");"
 					st4+="t"+markj+".innerHTML="+'"'+'H'+'"'+";"
-					st4+="var i"+markj+"=new FontFace("+'"'+"I"+markj+'"'+","+'"'+"url(font"+markj+".woff)"+'"'+");"
+					st4+="var i"+markj+"=new FontFace("+'"'+"I"+markj+'"'+","+'"'+"url("+filenamepad("font"+markj+".woff")+")"+'"'+");"
 					st4+="i"+markj+".load().then(function(face){document.fonts.add(face);"
 					st4+="t"+markj+".style.fontFamily=face.family;"
 					st4+="document.body.appendChild(t"+markj+");});"
@@ -258,10 +262,10 @@ def sitegenerate(website,sitecounter,instancecounter):
 			if st4<>"":
 				st+="window.onload=function(_){"+st4+"};\n"
 	
-			with open(writeto+"/script"+str(mark[i])+".js","w") as f:
+			with open(writeto+"/"+filenamepad("script"+str(mark[i])+".js"),"w") as f:
 				f.write(st+"/*"+"A"*(responsesize[i]-4-len(st))+"*/")
 		if type[i]=="Stylesheet":
-			with open(writeto+"/sheet"+str(mark[i])+".css","w") as f:
+			with open(writeto+"/"+filenamepad("sheet"+str(mark[i])+".css"),"w") as f:
 				f.write("/*"+"A"*(responsesize[i]-4)+"*/")	
 
 inputfile=open("parsed.txt","r")
@@ -275,13 +279,13 @@ for lines in text:
 	line=lines.strip().split(",")
 	name=line[0]+"_"+line[1]
 	value=int(line[2])
-	paddingsize[name]=random.randint(4,int(value/5))
+	paddingsize[name]=random.randint(4,int(value/2))
 for site in unparsedsites:
 	website=site.strip()
 	for j in range(instancenumber):
 		sitegenerate(website,sitecounter,j)
 		writeto="s"+sixdigit(sitecounter)+"_"+sixdigit(j)
-		with open(writeto+"/padding.js","w") as f:
+		with open(writeto+"/"+filenamepad("padding.js"),"w") as f:
 			f.write("/*"+"A"*(paddingsize[writeto]-4)+"*/")
 	print website
 	sitecounter +=1
