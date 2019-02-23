@@ -137,6 +137,7 @@ def gifg(n,filename):
 
 
 def sitegenerate(website,sitecounter,instancecounter,padding):
+	USED_NAMES[sitecounter] = set()
 	writeto="s"+sixdigit(sitecounter)+"_"+sixdigit(instancecounter)
 	mkdir="mkdir "+writeto
 	if not os.path.exists(writeto):
