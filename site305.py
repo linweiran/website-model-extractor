@@ -137,7 +137,6 @@ def gifg(n,filename):
 
 
 def sitegenerate(website,sitecounter,instancecounter,padding):
-	USED_NAMES[sitecounter] = set()
 	writeto="s"+sixdigit(sitecounter)+"_"+sixdigit(instancecounter)
 	mkdir="mkdir "+writeto
 	if not os.path.exists(writeto):
@@ -331,6 +330,7 @@ for lines in text:
 for site in unparsedsites:
 	website=site.strip()
 	for j in range(instancenumber):
+		USED_NAMES[sitecounter] = set()
 		padding=gen_filename("js",sitecounter)
 		sitegenerate(website,sitecounter,j,padding)
 		writeto="s"+sixdigit(sitecounter)+"_"+sixdigit(j)
