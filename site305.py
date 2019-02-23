@@ -330,8 +330,6 @@ for lines in text:
 for site in unparsedsites:
 	website=site.strip()
 	for j in range(instancenumber):
-		for k in COUNTERS.keys():
-			COUNTERS[k] = 0
 		padding=gen_filename("js",sitecounter)
 		sitegenerate(website,sitecounter,j,padding)
 		writeto="s"+sixdigit(sitecounter)+"_"+sixdigit(j)
