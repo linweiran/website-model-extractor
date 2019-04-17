@@ -23,6 +23,8 @@ for website in sites:
 			connection = data[requestId]
 			request = connection["requests"][0]
 			response = connection["responses"][0]
+			if response["response"]["headers"] is None:
+				continue
 			if "content-length" not in response["response"]["headers"]:
 				continue
 			requests[requestId]={}
@@ -41,5 +43,6 @@ for website in sites:
 				json_out = []
 				for rid, request in requests.items():
 					if 'connection' in request:
-						json.dump(json_out, f)
+						json_out.append(request)
+				json.dump(json_out, f)
 		step = step +1
