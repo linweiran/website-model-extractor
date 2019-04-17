@@ -23,17 +23,19 @@ for website in sites:
 			connection = data[requestId]
 			request = connection["requests"][0]
 			response = connection["responses"][0]
+			if "content-length" not in response["response"]["headers"]:
+				continue
 			requests[requestId]={}
 			#requests[requestId]['request_size'] = missing ? request headers?
 			requests[requestId]['start_time'] = request["timestamp"]
 			requests[requestId]['server'] = "not used"
 			requests[requestId]['type'] = request["type"]
-			requests[requestId]['response_size'] = response["encodedDataLength"]	
+			requests[requestId]['response_size'] = response["response"]["headers"]["content-length"]	
 			initiator = request["initiator"]
 			if "url" in initiator:			
 				requests[requestId]['initiator'] = initiator["url"]
-			requests[requestId]['connection']=response['connectionId']
-			requests[requestId]['remoteIP'] =response['remoteIPAddress']
+			requests[requestId]['connection']=response["response"]['connectionId']
+			requests[requestId]['remoteIP'] =response["response"]['remoteIPAddress']
 			requests[requestId]['end_time'] = response["timestamp"]
 			with open("http-origin/"+website+"-"+str(step+1)+".json","w") as f:
 				json_out = []
