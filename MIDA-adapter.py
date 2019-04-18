@@ -40,10 +40,10 @@ for website in sites:
 			requests[requestId]['connection']=response["response"]['connectionId']
 			requests[requestId]['remoteIP'] =response["response"]['remoteIPAddress']
 			requests[requestId]['end_time'] = response["timestamp"]
-			with open("http-origin/"+website+"-"+str(step+1)+".json","w") as f:
-				json_out = []
-				for rid, request in requests.items():
-					if 'connection' in request:
-						json_out.append(request)
-				json.dump(json_out, f)
+		with open("http-origin/"+website+"-"+str(step+1)+".json","w") as f:
+			json_out = []
+			for rid, request in requests.items():
+				if 'connection' in request:
+					json_out.append(request)
+			json.dump(json_out, f)
 		step = step +1
