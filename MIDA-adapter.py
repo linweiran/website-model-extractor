@@ -28,6 +28,7 @@ for website in sites:
 			if "content-length" not in response["response"]["headers"]:
 				continue
 			requests[requestId]={}
+			requests[requestId]['url']=response["response"]["url"]
 			#requests[requestId]['request_size'] = missing ? request headers?
 			requests[requestId]['start_time'] = request["timestamp"]
 			requests[requestId]['server'] = "not used"
